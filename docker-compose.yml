@@ -1,0 +1,29 @@
+version: "3.5"
+
+services:
+  git:
+    container_name: gitlab
+    image: gitlab/gitlab-ce:latest
+    hostname: gitlab.localhost.com
+    ports:
+      - "9090:80"
+      - "9043:443"
+      - "9022:22"
+    environment: 
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.localhost.com:9090'
+        gitlab_rails['initial_root_password'] = 'adminadmin'
+#        nginx['enable'] = true
+#        nginx['listen_port'] = 9090
+#        nginx['listen_https'] = false
+#    volumes:
+#      - gitlab-data:/var/opt/gitlab
+#      - gitlab-logs:/var/log/gitlab
+#      - gitlab-config:/etc/gitlab
+    restart: unless-stopped
+    
+
+#volumes:
+#  gitlab-data:
+#  gitlab-logs:
+#  gitlab-config:
